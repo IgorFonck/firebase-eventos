@@ -1,0 +1,17 @@
+.form-login {
+    max-width: 650px;
+}
+
+.btn-cadastro {
+    background-color: #239ba0;
+    color: #fff;
+}
+
+.btn-cadastro:hover {
+    background-color: #d2b214;
+    color: #fff;
+}
+
+.spinner-cadastro {
+    color: #239ba0;
+}
