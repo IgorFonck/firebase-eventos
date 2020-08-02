@@ -48,8 +48,24 @@ function NovoUsuario() {
                 
 
                 <div className="msg-cadastro text-center my-4">
-                    {msgTipo === 'sucesso' && <span className="d-block text-success"><strong>Wow!</strong> Usuário cadastrado com sucesso! :)</span>}
-                    {msgTipo === 'erro' && <span className="d-block text-danger"><strong>Ops!</strong> {msg}</span>}
+                    {
+                        msgTipo === 'sucesso' && 
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Ótimo!</strong> Usuário cadastrado com sucesso! :)
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+                    {
+                        msgTipo === 'erro' && 
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Ops!</strong> {msg}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
                 </div>
             </form>
         </div>

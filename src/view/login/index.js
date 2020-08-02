@@ -9,12 +9,23 @@ function Login() {
     const [email, setEmail] = useState();
     const [senha, setSenha] = useState();
     const [msgTipo, setMsgTipo] = useState();
+    const [carregando, setCarregando] = useState();
 
     function logar() {
+
+        setCarregando(1);
         
+        if(!email || !senha) {
+            setCarregando(0);
+            setMsgTipo('erro');
+            return;
+        }
+
         firebase.auth().signInWithEmailAndPassword(email, senha).then(resultado => {
+            setCarregando(0);
             setMsgTipo('sucesso');
         }).catch(erro => {
+            setCarregando(0);
             setMsgTipo('erro');
         });
 
@@ -31,11 +42,32 @@ function Login() {
                 <input onChange={(e) => setEmail(e.target.value)} type="email" id="inputEmail" class="form-control my-2" placeholder="E-mail" />
                 <input onChange={(e) => setSenha(e.target.value)} type="password" id="inputPassword" class="form-control my-2" placeholder="Senha" />
                 
-                <button onClick={logar} className="btn btn-lg btn-block btn-login" type="button">Logar</button>
+                {
+                    carregando ? <div className="d-block text-center"><div className="spinner-border spinner-login"></div></div>
+                    : <button onClick={logar} className="btn btn-lg btn-block btn-login" type="button">Logar</button>
+                }
+                
 
-                <div className="msg-login text-white text-center my-4">
-                    {msgTipo === 'sucesso' && <span className="d-block text-success"><strong>Wow!</strong> Você está conectado! :)</span>}
-                    {msgTipo === 'erro' && <span className="d-block text-danger"><strong>Ops!</strong> Verifique se o e-mail e a senha estão corretos.</span>}
+                <div className="msg-login text-center my-4">
+                    {
+                        msgTipo === 'sucesso' && 
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Ótimo!</strong> Você está conectado! :)
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
+                    
+                    {
+                        msgTipo === 'erro' && 
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Ops!</strong> Verifique se o e-mail e a senha estão corretos.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    }
                 </div>
 
                 <div className="opcoes-login mt-5 text-center">

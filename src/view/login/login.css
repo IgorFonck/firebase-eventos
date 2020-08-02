@@ -22,7 +22,11 @@
     color: #ffffff;
 }
 
-.opcoes-login a:hover {
+.opcoes-login a:hover, .spinner-login {
     color: #d2b214;
     transition: .3s ease-in;
+}
+
+.form-signin {
+    width: 650px;;
 }
